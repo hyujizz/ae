@@ -229,15 +229,16 @@ body::after {
 }
 
 /* LETTER */
+
 .letter {
   position: absolute;
-  bottom: 15px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%) translateY(0px) scaleY(0.2);
   transform-origin: bottom;
 
   width: 92%;
-  height: 270px;
+  height: 320px; /* LONGER PAPER */
   padding: 16px;
 
   background: var(--paper-color);
@@ -256,9 +257,22 @@ body::after {
   );
   background-size: 100% 52px;
 
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden; /* NO SCROLL */
 }
+
+@keyframes pullOut {
+  0% {
+    transform: translateX(-50%) translateY(0px) scaleY(0.2);
+    opacity: 0;
+  }
+  30% { opacity: 1; }
+  100% {
+    transform: translateX(-50%) translateY(-160px) scaleY(1); /* LOWER */
+    opacity: 1;
+  }
+}
+
+
 
 .poem {
   font-family: "Courier New", Courier, monospace;
@@ -267,6 +281,7 @@ body::after {
   line-height: 1.8;
   margin: 0;
   white-space: pre-wrap;
+
   opacity: 0;
   transition: opacity 0.6s ease;
 }
@@ -357,7 +372,7 @@ body::after {
 /* BUTTON */
 .read-btn {
   position: absolute;
-  top: -55px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
 
@@ -389,22 +404,24 @@ body::after {
 
 /* OPEN ANIMATION */
 .wrapper.active .flap {
-  transform: translateY(-80px);
+  transform: translateY(-70px);
   opacity: 0;
   transition: transform 0.6s ease, opacity 0.4s ease;
-  transition-delay: 0s, 0.35s;
+  transition-delay: 0s, 0.4s;
   pointer-events: none;
 }
 
+/* letter waits until flap is mostly gone */
 .wrapper.active .letter {
   opacity: 1;
-  animation: pullOut 1.1s ease forwards;
-  animation-delay: 0.3s;
+  transform: translateX(-50%) translateY(-220px) scaleY(1);
+  transition: transform 0.9s ease, opacity 0.6s ease;
+  transition-delay: 0.55s; /* <-- makes letter come out AFTER flap */
 }
 
 .wrapper.active .poem {
   opacity: 1;
-  transition-delay: 0.9s;
+  transition-delay: 1.2s;
 }
 
 .wrapper.active .read-btn {
@@ -432,25 +449,14 @@ body::after {
   pointer-events: auto;
 }
 
-@keyframes pullOut {
-  0% {
-    transform: translateX(-50%) translateY(0px) scaleY(0.2);
-    opacity: 0;
-  }
-  30% { opacity: 1; }
-  100% {
-    transform: translateX(-50%) translateY(-240px) scaleY(1);
-    opacity: 1;
-  }
-}
 
 /* GRASS */
 .grass {
   position: absolute;
   bottom: -40px;
-  left: 0;
+  left: 10;
 
-  width: 100%;
+  width: 120%;
   height: 200px;
 
   background: linear-gradient(to top, #6fc96c, #bdf7a9);
@@ -485,7 +491,7 @@ body::after {
 /* FLOWERS */
 .garden {
   position: absolute;
-  bottom: 40px;
+  bottom: -20px;
   left: 0;
 
   width: 100%;
