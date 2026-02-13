@@ -1,11 +1,6 @@
-const wrapper = document.querySelector(".wrapper");
-const btn = document.querySelector(".read-btn");
+const wrapper = document.getElementById("wrapper");
+const readBtn = document.getElementById("readBtn");
 
-btn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  wrapper.classList.toggle("active");
-});
-
-wrapper.addEventListener("click", () => {
-  wrapper.classList.toggle("active");
+readBtn.addEventListener("click", () => {
+  wrapper.classList.add("active");
 });
