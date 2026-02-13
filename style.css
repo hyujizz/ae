@@ -5,7 +5,7 @@
   --text-color: #4a4458;
   --accent: #9575cd;
   --heart-color: #ff80ab;
-  --env-height: 140px;
+  --env-height: 120px;
 }
 
 html, body {
@@ -18,13 +18,13 @@ body {
   min-height: 100svh;
 
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
 
   display: flex;
   justify-content: center;
   align-items: flex-end;
 
-  padding-bottom: 180px;
+  padding-bottom: 100px;
   position: relative;
 }
 
@@ -43,30 +43,17 @@ body::after {
   pointer-events: none;
 }
 
+/* SUN */
 .sun {
-  position: fixed;
+  position: absolute;
   top: 90px;
   right: 45px;
-
   width: 150px;
   height: 150px;
-
-  background: radial-gradient(circle,
-    rgba(255, 255, 220, 1) 0%,
-    rgba(255, 245, 180, 0.85) 25%,
-    rgba(255, 235, 160, 0.45) 50%,
-    rgba(255, 235, 160, 0.0) 78%
-  );
-
   border-radius: 50%;
-
-  filter: blur(2px);
-  opacity: 1;
-
-  z-index: 20;
+  z-index: 15;
   pointer-events: none;
 }
-
 
 .sun::after {
   content: "";
@@ -83,6 +70,7 @@ body::after {
   filter: blur(10px);
 }
 
+/* FLOATING HEARTS */
 .floating-hearts {
   position: absolute;
   width: 100%;
@@ -151,34 +139,25 @@ body::after {
     transform: translateY(0) translateX(0) rotate(45deg);
     opacity: 0;
   }
-  20% {
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(-60vh) translateX(25px) rotate(45deg);
-  }
-  80% {
-    transform: translateY(-90vh) translateX(-25px) rotate(45deg);
-  }
+  20% { opacity: 1; }
+  50% { transform: translateY(-60vh) translateX(25px) rotate(45deg); }
+  80% { transform: translateY(-90vh) translateX(-25px) rotate(45deg); }
   100% {
     transform: translateY(-130vh) translateX(30px) rotate(45deg);
     opacity: 0;
   }
 }
 
+/* CLOUDS */
 .clouds {
   position: fixed;
   top: 140px;
   left: 0;
-
   width: 100%;
   height: 200px;
-
   pointer-events: none;
   z-index: 10;
 }
-
-
 
 .cloud {
   position: absolute;
@@ -186,7 +165,6 @@ body::after {
   height: 60px;
   background: rgba(130, 190, 255, 0.55);
   border-radius: 50px;
-  filter: blur(0.2px);
   animation: driftCloud 10s ease-in-out infinite alternate;
 }
 
@@ -201,13 +179,8 @@ body::after {
   top: -30px;
 }
 
-.cloud::before {
-  left: 15px;
-}
-
-.cloud::after {
-  right: 15px;
-}
+.cloud::before { left: 15px; }
+.cloud::after { right: 15px; }
 
 .cloud1 { top: 10px; left: 5%; animation-duration: 14s; }
 .cloud2 { top: 70px; left: 60%; animation-duration: 16s; }
@@ -219,6 +192,7 @@ body::after {
   100% { transform: translateX(30px); }
 }
 
+/* SPARKLES */
 .sparkles {
   position: absolute;
   width: 100%;
@@ -236,7 +210,6 @@ body::after {
   background: rgba(255, 255, 255, 0.7);
   border-radius: 50%;
   animation: sparkleFloat 8s linear infinite;
-  z-index: 1;
 }
 
 .sparkles span:nth-child(1) { left: 15%; top: 20%; animation-delay: 0s; }
@@ -254,15 +227,18 @@ body::after {
   100% { transform: scale(0.5); opacity: 0; }
 }
 
+/* WRAPPER */
 .wrapper {
   position: relative;
-  width: min(320px, 90vw);
-  height: 220px;
+  width: min(260px, 85vw);
+  height: 200px;
   cursor: pointer;
   z-index: 50;
-  margin-bottom: 35px;
+  margin-bottom: -40px;
+  transform: scale(0.92);
 }
 
+/* LETTER */
 .letter {
   position: absolute;
   bottom: 10px;
@@ -271,16 +247,12 @@ body::after {
 
   transform-origin: bottom;
 
-  width: 100%;
-  min-height: 190px;
-  padding: 18px;
+  width: 92%;
+  min-height: 160px;
+  padding: 14px;
 
   background: var(--paper-color);
   border-radius: 10px;
-
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
 
   opacity: 0;
   z-index: 8;
@@ -300,18 +272,16 @@ body::after {
 
 .poem {
   font-family: "Courier New", Courier, monospace;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--text-color);
-
   line-height: 1.8;
   margin: 0;
-
   white-space: pre;
   opacity: 0;
-
   transition: opacity 0.6s ease;
 }
 
+/* ENVELOPE */
 .envelope {
   position: absolute;
   bottom: 0;
@@ -336,7 +306,7 @@ body::after {
   left: 0;
 
   width: 100%;
-  height: 85px;
+  height: 75px;
 
   background: var(--env-color);
   clip-path: polygon(0 100%, 100% 100%, 50% 0);
@@ -362,66 +332,39 @@ body::after {
   z-index: 0;
 }
 
+/* FLAP */
 .flap {
   position: absolute;
-  bottom: calc(var(--env-height) - 90px);
+  bottom: calc(var(--env-height) - 80px);
   left: 0;
 
   width: 100%;
-  height: 90px;
+  height: 80px;
 
   background: var(--env-color);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
 
-transition: transform 0.8s ease, opacity 0.6s ease;
+  transition: transform 0.8s ease, opacity 0.6s ease;
   z-index: 6;
-opacity: 0.95;
-
+  opacity: 0.95;
 }
 
-
-
+/* LABEL */
 .label {
   position: absolute;
-  bottom: 28px;
+  bottom: 22px;
   left: 50%;
   transform: translateX(-50%);
 
   font-family: "Courier New", Courier, monospace;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: bold;
 
   color: #ff4f8b;
-
   z-index: 10;
 }
 
-.heart::before,
-.heart::after {
-  content: "";
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  background: var(--heart-color);
-  border-radius: 50%;
-}
-
-.heart::before {
-  top: -7px;
-  left: 0;
-}
-
-.heart::after {
-  left: -7px;
-  top: 0;
-}
-
-@keyframes heartbeat {
-  0% { transform: rotate(45deg) scale(1); }
-  50% { transform: rotate(45deg) scale(1.25); }
-  100% { transform: rotate(45deg) scale(1); }
-}
-
+/* BUTTON */
 .read-btn {
   position: absolute;
   top: -55px;
@@ -463,8 +406,6 @@ opacity: 0.95;
   pointer-events: none;
 }
 
-
-
 .wrapper.active .letter {
   opacity: 1;
   animation: pullOut 1.1s ease forwards;
@@ -486,15 +427,14 @@ opacity: 0.95;
     transform: translateX(-50%) translateY(0px) scaleY(0.2);
     opacity: 0;
   }
-  30% {
-    opacity: 1;
-  }
+  30% { opacity: 1; }
   100% {
-    transform: translateX(-50%) translateY(-240px) scaleY(1);
+    transform: translateX(-50%) translateY(-190px) scaleY(1);
     opacity: 1;
   }
 }
 
+/* GRASS */
 .grass {
   position: absolute;
   bottom: -40px;
@@ -532,6 +472,7 @@ opacity: 0.95;
   opacity: 0.35;
 }
 
+/* FLOWERS */
 .garden {
   position: absolute;
   bottom: 40px;
@@ -636,11 +577,12 @@ opacity: 0.95;
 
 @media (max-width: 480px) {
   .wrapper {
-    height: 230px;
+    transform: scale(0.9);
+    margin-bottom: -55px;
   }
 
   .poem {
-    font-size: 0.76rem;
+    font-size: 0.74rem;
   }
 
   .read-btn {
