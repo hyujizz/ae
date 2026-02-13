@@ -7,19 +7,15 @@
   --heart-color: #ff80ab;
 }
 
-/* IMPORTANT FIX FOR IPHONE SAFARI */
 html, body {
   height: 100%;
+  margin: 0;
 }
 
-/* ===============================
-   🌤 Background FIXED
-================================= */
 body {
   background: linear-gradient(to top, #dcedc8 0%, #f8f6f9 50%, #e1bee7 100%);
-  margin: 0;
-
   min-height: 100svh;
+
   overflow-x: hidden;
   overflow-y: hidden;
 
@@ -27,120 +23,63 @@ body {
   justify-content: center;
   align-items: flex-end;
 
-  padding-bottom: calc(120px + env(safe-area-inset-bottom));
+  padding-bottom: 180px;
+  position: relative;
 }
 
-/* ===============================
-   ☀️ Soft Sun Glow
-================================= */
-.sun {
-  position: fixed;
-  top: -60px;
-  right: -60px;
-
-  width: 220px;
-  height: 220px;
-
-  background: radial-gradient(circle,
-    rgba(255, 240, 180, 0.9) 0%,
-    rgba(255, 200, 230, 0.3) 50%,
-    rgba(255, 255, 255, 0) 75%
-  );
-
-  border-radius: 50%;
-  filter: blur(2px);
-  opacity: 0.85;
-
-  z-index: 0;
-  pointer-events: none;
-
-  animation: sunPulse 6s ease-in-out infinite;
-}
-
-@keyframes sunPulse {
-  0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.07); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.8; }
-}
-
-/* ===============================
-   ☁️ Pink Clouds
-================================= */
-.clouds {
-  position: fixed;
-  top: 0;
+body::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
   left: 0;
 
   width: 100%;
-  height: 100%;
+  height: 220px;
 
-  pointer-events: none;
-  overflow: hidden;
+  background: linear-gradient(to top, rgba(111, 201, 108, 0.0), rgba(111, 201, 108, 0.35));
 
   z-index: 0;
+  pointer-events: none;
 }
 
-.cloud {
-  position: absolute;
-  width: 160px;
-  height: 60px;
-
-  background: rgba(255, 200, 230, 0.55);
-  border-radius: 50px;
-
-  filter: blur(1px);
-
-  animation: floatClouds 65s linear infinite, cloudBounce 7s ease-in-out infinite;
-}
-
-.cloud::before,
-.cloud::after {
-  content: "";
-  position: absolute;
-  background: rgba(255, 200, 230, 0.55);
-  border-radius: 50%;
-}
-
-.cloud::before {
-  width: 70px;
-  height: 70px;
-  top: -35px;
-  left: 20px;
-}
-
-.cloud::after {
-  width: 90px;
-  height: 90px;
-  top: -45px;
-  right: 25px;
-}
-
-.cloud1 { top: 10%; left: -200px; transform: scale(1.1); }
-.cloud2 { top: 22%; left: -250px; transform: scale(0.9); opacity: 0.6; animation-duration: 80s, 6s; }
-.cloud3 { top: 35%; left: -220px; transform: scale(1.3); opacity: 0.5; animation-duration: 75s, 5s; }
-.cloud4 { top: 8%; left: -180px; transform: scale(0.7); opacity: 0.4; animation-duration: 90s, 8s; }
-
-@keyframes floatClouds {
-  from { transform: translateX(-300px); }
-  to { transform: translateX(130vw); }
-}
-
-@keyframes cloudBounce {
-  0% { margin-top: 0px; }
-  50% { margin-top: 10px; }
-  100% { margin-top: 0px; }
-}
 
 /* ===============================
-   💗 Floating Hearts From Sides
+   ☀️ Soft Sun
+================================= */
+.sun {
+  position: absolute;
+  top: 70px;
+  right: 35px;
+
+  width: 160px;
+  height: 160px;
+
+  background: radial-gradient(circle,
+    rgba(255, 245, 200, 1) 0%,
+    rgba(255, 245, 200, 0.55) 35%,
+    rgba(255, 245, 200, 0.0) 75%
+  );
+
+  border-radius: 50%;
+  filter: blur(6px);
+
+  z-index: 6;
+  pointer-events: none;
+
+  transform: translateZ(0);
+}
+
+
+/* ===============================
+   💗 Floating Hearts (FROM SIDES)
 ================================= */
 .floating-hearts {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
 .floating-hearts span {
@@ -149,10 +88,9 @@ body {
   height: 14px;
   background: rgba(255, 128, 171, 0.45);
   transform: rotate(45deg);
+  animation: floatSideHearts 12s linear infinite;
   border-radius: 4px;
-
-  opacity: 0;
-  animation: floatHeartsSide 12s linear infinite;
+  bottom: -20px;
 }
 
 .floating-hearts span::before,
@@ -176,50 +114,102 @@ body {
 }
 
 /* LEFT SIDE hearts */
-.floating-hearts span:nth-child(1)  { left: -20px; top: 10%; animation-delay: 0s; }
-.floating-hearts span:nth-child(2)  { left: -20px; top: 20%; animation-delay: 2s; }
-.floating-hearts span:nth-child(3)  { left: -20px; top: 35%; animation-delay: 4s; }
-.floating-hearts span:nth-child(4)  { left: -20px; top: 50%; animation-delay: 1s; }
-.floating-hearts span:nth-child(5)  { left: -20px; top: 65%; animation-delay: 3s; }
-.floating-hearts span:nth-child(6)  { left: -20px; top: 80%; animation-delay: 5s; }
-.floating-hearts span:nth-child(7)  { left: -20px; top: 90%; animation-delay: 6s; }
+.floating-hearts span:nth-child(1)  { left: 2%; animation-delay: 0s; }
+.floating-hearts span:nth-child(2)  { left: 6%; animation-delay: 2s; }
+.floating-hearts span:nth-child(3)  { left: 10%; animation-delay: 4s; }
+.floating-hearts span:nth-child(4)  { left: 14%; animation-delay: 6s; }
+.floating-hearts span:nth-child(5)  { left: 18%; animation-delay: 8s; }
+.floating-hearts span:nth-child(6)  { left: 22%; animation-delay: 10s; }
 
 /* RIGHT SIDE hearts */
-.floating-hearts span:nth-child(8)  { right: -20px; top: 15%; animation-delay: 0.5s; }
-.floating-hearts span:nth-child(9)  { right: -20px; top: 25%; animation-delay: 2.5s; }
-.floating-hearts span:nth-child(10) { right: -20px; top: 40%; animation-delay: 4.5s; }
-.floating-hearts span:nth-child(11) { right: -20px; top: 55%; animation-delay: 1.5s; }
-.floating-hearts span:nth-child(12) { right: -20px; top: 70%; animation-delay: 3.5s; }
-.floating-hearts span:nth-child(13) { right: -20px; top: 82%; animation-delay: 5.5s; }
-.floating-hearts span:nth-child(14) { right: -20px; top: 92%; animation-delay: 6.5s; }
+.floating-hearts span:nth-child(7)  { left: 78%; animation-delay: 1s; }
+.floating-hearts span:nth-child(8)  { left: 82%; animation-delay: 3s; }
+.floating-hearts span:nth-child(9)  { left: 86%; animation-delay: 5s; }
+.floating-hearts span:nth-child(10) { left: 90%; animation-delay: 7s; }
+.floating-hearts span:nth-child(11) { left: 94%; animation-delay: 9s; }
+.floating-hearts span:nth-child(12) { left: 98%; animation-delay: 11s; }
 
-/* EXTRA */
-.floating-hearts span:nth-child(15) { left: -20px; top: 5%;  animation-delay: 7s; }
-.floating-hearts span:nth-child(16) { right: -20px; top: 8%; animation-delay: 8s; }
-.floating-hearts span:nth-child(17) { left: -20px; top: 45%; animation-delay: 9s; }
-.floating-hearts span:nth-child(18) { right: -20px; top: 48%; animation-delay: 10s; }
-.floating-hearts span:nth-child(19) { left: -20px; top: 75%; animation-delay: 11s; }
-.floating-hearts span:nth-child(20) { right: -20px; top: 78%; animation-delay: 12s; }
+/* random extras */
+.floating-hearts span:nth-child(13) { left: 12%; animation-delay: 13s; }
+.floating-hearts span:nth-child(14) { left: 88%; animation-delay: 14s; }
+.floating-hearts span:nth-child(15) { left: 5%; animation-delay: 15s; }
+.floating-hearts span:nth-child(16) { left: 95%; animation-delay: 16s; }
+.floating-hearts span:nth-child(17) { left: 20%; animation-delay: 17s; }
+.floating-hearts span:nth-child(18) { left: 80%; animation-delay: 18s; }
+.floating-hearts span:nth-child(19) { left: 8%; animation-delay: 19s; }
+.floating-hearts span:nth-child(20) { left: 92%; animation-delay: 20s; }
 
-@keyframes floatHeartsSide {
-  0% { transform: translateX(0px) translateY(0px) rotate(45deg); opacity: 0; }
-  10% { opacity: 1; }
-  50% { transform: translateX(120px) translateY(-120px) rotate(45deg); }
-  80% { transform: translateX(180px) translateY(-250px) rotate(45deg); opacity: 0.8; }
-  100% { transform: translateX(220px) translateY(-350px) rotate(45deg); opacity: 0; }
+@keyframes floatSideHearts {
+  0% {
+    transform: translateY(0) translateX(0) rotate(45deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-60vh) translateX(25px) rotate(45deg);
+  }
+  80% {
+    transform: translateY(-90vh) translateX(-25px) rotate(45deg);
+  }
+  100% {
+    transform: translateY(-130vh) translateX(30px) rotate(45deg);
+    opacity: 0;
+  }
 }
 
-/* Right side hearts move left instead */
-.floating-hearts span:nth-child(n+8) {
-  animation-name: floatHeartsSideRight;
+/* ===============================
+   ☁️ Clouds
+================================= */
+.clouds {
+  position: absolute;
+  top: 140px; /* lower */
+  left: 0;
+  width: 100%;
+  height: 200px;
+  pointer-events: none;
+  z-index: 2;
 }
 
-@keyframes floatHeartsSideRight {
-  0% { transform: translateX(0px) translateY(0px) rotate(45deg); opacity: 0; }
-  10% { opacity: 1; }
-  50% { transform: translateX(-120px) translateY(-120px) rotate(45deg); }
-  80% { transform: translateX(-180px) translateY(-250px) rotate(45deg); opacity: 0.8; }
-  100% { transform: translateX(-220px) translateY(-350px) rotate(45deg); opacity: 0; }
+
+.cloud {
+  position: absolute;
+  width: 120px;
+  height: 60px;
+  background: rgba(130, 190, 255, 0.55);
+  border-radius: 50px;
+  filter: blur(0.2px);
+  animation: driftCloud 10s ease-in-out infinite alternate;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: rgba(130, 190, 255, 0.55);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  top: -30px;
+}
+
+.cloud::before {
+  left: 15px;
+}
+
+.cloud::after {
+  right: 15px;
+}
+
+.cloud1 { top: 10px; left: 5%; animation-duration: 14s; }
+.cloud2 { top: 70px; left: 60%; animation-duration: 16s; }
+.cloud3 { top: 30px; left: 30%; animation-duration: 12s; }
+.cloud4 { top: 110px; left: 15%; animation-duration: 18s; }
+
+@keyframes driftCloud {
+  0% { transform: translateX(-30px); }
+  100% { transform: translateX(30px); }
 }
 
 /* ===============================
@@ -251,19 +241,19 @@ body {
 }
 
 /* ===============================
-   💌 Envelope Wrapper
+   💌 Wrapper
 ================================= */
 .wrapper {
   position: relative;
-  width: min(250px, 80vw);
-  height: 220px;
+  width: min(340px, 92vw);
+  height: 240px;
   cursor: pointer;
-  z-index: 5;
-  margin-bottom: 30px;
+  z-index: 50;
+  margin-bottom: 40px;
 }
 
 /* ===============================
-   📜 Letter
+   📜 Letter (FIXED spacing + not fat)
 ================================= */
 .letter {
   position: absolute;
@@ -272,18 +262,16 @@ body {
   transform: translateX(-50%) scaleY(0.1);
   transform-origin: bottom;
 
-  width: 92%;
-  min-height: 140px;
-  padding: 14px;
-  box-sizing: border-box;
+  width: 100%;
+  min-height: 210px;
+  padding: 20px;
 
   background: var(--paper-color);
-  border-radius: 12px;
+  border-radius: 10px;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 
   opacity: 0;
   z-index: 8;
@@ -301,44 +289,31 @@ body {
   overflow: hidden;
 }
 
-/* Fold lines */
-.letter::before,
-.letter::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: rgba(0, 0, 0, 0.07);
-}
-
-.letter::before { top: 35%; }
-.letter::after { top: 70%; }
-
-/* poem text */
-.letter p {
+.poem {
   font-family: "Courier New", Courier, monospace;
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: var(--text-color);
-  line-height: 1.7;
+
+  line-height: 1.8;
   margin: 0;
 
+  white-space: pre;
+  word-spacing: 0px;
+  letter-spacing: 0px;
   opacity: 0;
-  transition: opacity 0.6s ease;
 
-  position: relative;
-  z-index: 5;
+  transition: opacity 0.6s ease;
 }
 
 /* ===============================
-   📩 Envelope Base (PURPLE)
+   📩 Envelope
 ================================= */
 .envelope {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 140px;
+  height: 150px;
 
   background-color: var(--env-dark);
   border-radius: 0 0 14px 14px;
@@ -348,7 +323,6 @@ body {
   overflow: visible;
 }
 
-/* Bottom triangle */
 .envelope::after {
   content: "";
   position: absolute;
@@ -358,15 +332,15 @@ body {
   width: 0;
   height: 0;
 
-  border-left: 125px solid transparent;
-  border-right: 125px solid transparent;
-  border-bottom: 90px solid var(--env-color);
+  border-left: 170px solid transparent;
+  border-right: 170px solid transparent;
+  border-bottom: 95px solid var(--env-color);
 
   z-index: 1;
 }
 
 /* ===============================
-   🔺 Flap (PURPLE)
+   🔺 Flap
 ================================= */
 .flap {
   position: absolute;
@@ -376,9 +350,9 @@ body {
   width: 0;
   height: 0;
 
-  border-left: 125px solid transparent;
-  border-right: 125px solid transparent;
-  border-top: 90px solid var(--env-color);
+  border-left: 170px solid transparent;
+  border-right: 170px solid transparent;
+  border-top: 95px solid var(--env-color);
 
   transform-origin: top;
   transition: transform 0.7s ease-in-out;
@@ -390,7 +364,7 @@ body {
 ================================= */
 .hearts {
   position: absolute;
-  bottom: 26px;
+  bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -417,8 +391,15 @@ body {
   border-radius: 50%;
 }
 
-.heart::before { top: -7px; left: 0; }
-.heart::after { left: -7px; top: 0; }
+.heart::before {
+  top: -7px;
+  left: 0;
+}
+
+.heart::after {
+  left: -7px;
+  top: 0;
+}
 
 @keyframes heartbeat {
   0% { transform: rotate(45deg) scale(1); }
@@ -427,7 +408,7 @@ body {
 }
 
 /* ===============================
-   💌 Click Button
+   💌 Button
 ================================= */
 .read-btn {
   position: absolute;
@@ -462,7 +443,7 @@ body {
 }
 
 /* ===============================
-   ✨ Open Envelope State
+   ✨ Open State
 ================================= */
 .wrapper.active .flap {
   transform: rotateX(180deg);
@@ -470,12 +451,11 @@ body {
 }
 
 .wrapper.active .letter {
-  transform: translateX(-50%) translateY(-160px) scaleY(1);
+  transform: translateX(-50%) translateY(-200px) scaleY(1);
   opacity: 1;
-  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.18));
 }
 
-.wrapper.active .letter p {
+.wrapper.active .poem {
   opacity: 1;
   transition-delay: 0.3s;
 }
@@ -486,27 +466,68 @@ body {
 }
 
 /* ===============================
-   🌼 Daisy Meadow (ORIGINAL GOOD ONE)
+   🌱 Grass
 ================================= */
-.garden {
-  position: fixed;
-  bottom: 0;
+.grass {
+  position: absolute;
+  bottom: -40px; /* pushes grass DOWN */
   left: 0;
 
   width: 100%;
-  height: 160px;
+  height: 200px;
+
+  background: linear-gradient(to top, #6fc96c, #bdf7a9);
+
+  border-top-left-radius: 90px;
+  border-top-right-radius: 90px;
+
+  z-index: 1;
+  overflow: hidden;
+}
+
+
+.grass::before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: 0;
+
+  width: 100%;
+  height: 80px;
+
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.15) 0px,
+    rgba(255, 255, 255, 0.15) 10px,
+    transparent 10px,
+    transparent 22px
+  );
+
+  opacity: 0.35;
+}
+
+/* ===============================
+   🌼 Daisy Meadow
+================================= */
+.garden {
+  position: absolute;
+  bottom: 40px; /* moved down */
+  left: 0;
+
+  width: 100%;
+  height: 170px;
 
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
 
   pointer-events: none;
-  z-index: 2;
+  z-index: 20;
 
   padding: 0 10px;
 }
 
-/* Stem */
+
 .flower {
   position: relative;
   width: 4px;
@@ -523,7 +544,6 @@ body {
 .flower.medium { height: 90px; }
 .flower.short { height: 70px; }
 
-/* Leaves */
 .leaf {
   position: absolute;
   width: 18px;
@@ -545,7 +565,6 @@ body {
   transform: rotate(25deg);
 }
 
-/* Flower head */
 .flower .head {
   position: absolute;
   bottom: 100%;
@@ -556,7 +575,6 @@ body {
   animation: float 5s ease-in-out infinite;
 }
 
-/* Petals */
 .flower .head span {
   position: absolute;
   top: 50%;
@@ -570,7 +588,6 @@ body {
   box-shadow: 0 2px 5px rgba(0,0,0,0.08);
 }
 
-/* Center */
 .flower .head::after {
   content: "";
   position: absolute;
@@ -579,7 +596,7 @@ body {
   width: 14px;
   height: 14px;
   background: #fbc02d;
-  border-radius:  50%;
+  border-radius: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 0 3px #f9a825;
 }
@@ -600,24 +617,20 @@ body {
 ================================= */
 @media (max-width: 480px) {
   .wrapper {
-    height: 220px;
+    height: 230px;
   }
 
   .wrapper.active .letter {
-    transform: translateX(-50%) translateY(-145px) scaleY(1);
+    transform: translateX(-50%) translateY(-185px) scaleY(1);
   }
 
-  .letter p {
-    font-size: 0.72rem;
+  .poem {
+    font-size: 0.76rem;
   }
 
   .read-btn {
     top: -50px;
     font-size: 0.75rem;
     padding: 9px 16px;
-  }
-
-  .garden {
-    height: 150px;
   }
 }
