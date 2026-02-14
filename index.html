@@ -1,622 +1,141 @@
-:root {
-  --env-color: #d1c4e9;
-  --env-dark: #b39ddb;
-  --paper-color: #ffffff;
-  --text-color: #4a4458;
-  --accent: #9575cd;
-  --heart-color: #ff80ab;
-
-  --env-height: 130px;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-
-body {
-  background: linear-gradient(to top, #dcedc8 0%, #f8f6f9 50%, #e1bee7 100%);
-  min-height: 100svh;
-
-  overflow-x: hidden;
-  overflow-y: auto;
-
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-
-  padding-bottom: 120px;
-  position: relative;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  bottom: 0;
-  left: 0;
-
-  width: 100vw;
-  height: 220px;
-
-  background: linear-gradient(
-    to top,
-    rgba(111, 201, 108, 0.0),
-    rgba(111, 201, 108, 0.35)
-  );
-
-  z-index: 0;
-  pointer-events: none;
-}
-
-
-/* SUN */
-.sun {
-  position: absolute;
-  top: 90px;
-  right: 45px;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  z-index: 15;
-  pointer-events: none;
-}
-
-.sun::after {
-  content: "";
-  position: absolute;
-  inset: -25px;
-
-  background: radial-gradient(circle,
-    rgba(255, 250, 200, 0.65) 0%,
-    rgba(255, 240, 170, 0.25) 45%,
-    rgba(255, 240, 170, 0.0) 80%
-  );
-
-  border-radius: 50%;
-  filter: blur(10px);
-}
-
-/* FLOATING HEARTS */
-.floating-hearts {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.floating-hearts span {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  background: rgba(255, 128, 171, 0.35);
-  transform: rotate(45deg);
-  animation: floatSideHearts 12s linear infinite;
-  border-radius: 4px;
-  bottom: -20px;
-}
-
-.floating-hearts span::before,
-.floating-hearts span::after {
-  content: "";
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  background: rgba(255, 128, 171, 0.35);
-  border-radius: 50%;
-}
-
-.floating-hearts span::before {
-  top: -7px;
-  left: 0;
-}
-
-.floating-hearts span::after {
-  left: -7px;
-  top: 0;
-}
-
-.floating-hearts span:nth-child(1)  { left: 2%; animation-delay: 0s; }
-.floating-hearts span:nth-child(2)  { left: 8%; animation-delay: 2s; }
-.floating-hearts span:nth-child(3)  { left: 15%; animation-delay: 4s; }
-.floating-hearts span:nth-child(4)  { left: 22%; animation-delay: 6s; }
-.floating-hearts span:nth-child(5)  { left: 30%; animation-delay: 8s; }
-
-.floating-hearts span:nth-child(6)  { left: 70%; animation-delay: 1s; }
-.floating-hearts span:nth-child(7)  { left: 78%; animation-delay: 3s; }
-.floating-hearts span:nth-child(8)  { left: 85%; animation-delay: 5s; }
-.floating-hearts span:nth-child(9)  { left: 92%; animation-delay: 7s; }
-.floating-hearts span:nth-child(10) { left: 98%; animation-delay: 9s; }
-
-@keyframes floatSideHearts {
-  0% {
-    transform: translateY(0) translateX(0) rotate(45deg);
-    opacity: 0;
-  }
-  20% { opacity: 1; }
-  50% { transform: translateY(-60vh) translateX(25px) rotate(45deg); }
-  80% { transform: translateY(-90vh) translateX(-25px) rotate(45deg); }
-  100% {
-    transform: translateY(-130vh) translateX(30px) rotate(45deg);
-    opacity: 0;
-  }
-}
-
-/* CLOUDS */
-.clouds {
-  position: fixed;
-  top: 120px;
-  left: 0;
-  width: 100%;
-  height: 30px;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.cloud {
-  position: absolute;
-  width: 140px;
-  height: 65px;
-  background: rgba(130, 190, 255, 0.35);
-  border-radius: 50px;
-  animation: driftCloud 12s ease-in-out infinite alternate;
-}
-
-.cloud::before,
-.cloud::after {
-  content: "";
-  position: absolute;
-  background: rgba(130, 190, 255, 0.35);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  top: -35px;
-}
-
-.cloud::before { left: 15px; }
-.cloud::after { right: 15px; }
-
-.cloud1 { top: 30px; left: 6%; animation-duration: 16s; }
-.cloud2 { top: 140px; left: 65%; animation-duration: 18s; }
-.cloud3 { top: 90px; left: 35%; animation-duration: 14s; }
-.cloud4 { top: 170px; left: 15%; animation-duration: 20s; }
-
-@keyframes driftCloud {
-  0% { transform: translateX(-35px); }
-  100% { transform: translateX(35px); }
-}
-
-/* SPARKLES */
-.sparkles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.sparkles span {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  animation: sparkleFloat 8s linear infinite;
-}
-
-.sparkles span:nth-child(1) { left: 15%; top: 20%; animation-delay: 0s; }
-.sparkles span:nth-child(2) { left: 30%; top: 60%; animation-delay: 2s; }
-.sparkles span:nth-child(3) { left: 50%; top: 40%; animation-delay: 1s; }
-.sparkles span:nth-child(4) { left: 70%; top: 30%; animation-delay: 3s; }
-.sparkles span:nth-child(5) { left: 90%; top: 70%; animation-delay: 4s; }
-.sparkles span:nth-child(6) { left: 10%; top: 80%; animation-delay: 5s; }
-.sparkles span:nth-child(7) { left: 60%; top: 10%; animation-delay: 1.5s; }
-.sparkles span:nth-child(8) { left: 80%; top: 50%; animation-delay: 2.5s; }
-
-@keyframes sparkleFloat {
-  0% { transform: scale(0.5); opacity: 0; }
-  50% { transform: scale(1.3); opacity: 1; }
-  100% { transform: scale(0.5); opacity: 0; }
-}
-
-/* WRAPPER */
-.wrapper {
-  position: relative;
-  width: min(330px, 90vw);
-  height: 420px;
-  cursor: pointer;
-  z-index: 50;
-  margin-bottom: -40px;
-  transform: scale(0.92);
-}
-
-/* LETTER */
-
-.letter {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%) translateY(0px) scaleY(0.2);
-  transform-origin: bottom;
-
-  width: 92%;
-  height: 320px; /* LONGER PAPER */
-  padding: 16px;
-
-  background: var(--paper-color);
-  border-radius: 10px;
-
-  opacity: 0;
-  z-index: 8;
-
-  transition: opacity 0.6s ease;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-
-  background-image: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.05) 1px,
-    transparent 1px
-  );
-  background-size: 100% 52px;
-
-  overflow: hidden; /* NO SCROLL */
-}
-
-@keyframes pullOut {
-  0% {
-    transform: translateX(-50%) translateY(0px) scaleY(0.2);
-    opacity: 0;
-  }
-  30% { opacity: 1; }
-  100% {
-    transform: translateX(-50%) translateY(-160px) scaleY(1); /* LOWER */
-    opacity: 1;
-  }
-}
-
-
-
-.poem {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.78rem;
-  color: var(--text-color);
-  line-height: 1.8;
-  margin: 0;
-  white-space: pre-wrap;
-
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-/* ENVELOPE */
-.envelope {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-  height: var(--env-height);
-
-  background-color: var(--env-dark);
-  border-radius: 0 0 14px 14px;
-
-  box-shadow: 0 12px 35px rgba(103, 58, 183, 0.18);
-  z-index: 2;
-
-  overflow: visible;
-}
-
-.envelope::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-  height: 80px;
-
-  background: var(--env-color);
-  clip-path: polygon(0 100%, 100% 100%, 50% 0);
-
-  z-index: 1;
-}
-
-.envelope::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background: var(--env-dark);
-  clip-path: polygon(
-    0 0,
-    50% 55%,
-    0 100%,
-    100% 100%,
-    50% 55%,
-    100% 0
-  );
-
-  z-index: 0;
-}
-
-/* FLAP */
-.flap {
-  position: absolute;
-  bottom: calc(var(--env-height) - 85px);
-  left: 0;
-
-  width: 100%;
-  height: 85px;
-
-  background: var(--env-color);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-
-  transition: transform 0.8s ease, opacity 0.6s ease;
-  z-index: 6;
-  opacity: 0.95;
-}
-
-/* LABEL */
-.label {
-  position: absolute;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.75rem;
-  font-weight: bold;
-
-  color: #ff4f8b;
-  z-index: 10;
-}
-
-/* BUTTON */
-.read-btn {
-  position: absolute;
-  bottom: 155px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  padding: 10px 18px;
-  border: none;
-  border-radius: 999px;
-
-  background: linear-gradient(to right, #ce93d8, #b39ddb);
-  color: white;
-
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  font-family: Arial, sans-serif;
-
-  cursor: pointer;
-  z-index: 20;
-
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  transition: transform 0.2s ease, opacity 0.3s ease;
-}
-
-
-.read-btn:hover {
-  transform: translateX(-50%) scale(1.05);
-}
-
-.read-btn:active {
-  transform: translateX(-50%) scale(0.95);
-}
-
-/* OPEN ANIMATION */
-.wrapper.active .flap {
-  transform: translateY(-70px);
-  opacity: 0;
-  transition: transform 0.6s ease, opacity 0.4s ease;
-  transition-delay: 0s, 0.4s;
-  pointer-events: none;
-}
-
-/* letter waits until flap is mostly gone */
-.wrapper.active .letter {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-220px) scaleY(1);
-  transition: transform 0.9s ease, opacity 0.6s ease;
-  transition-delay: 0.55s; /* <-- makes letter come out AFTER flap */
-}
-
-.wrapper.active .poem {
-  opacity: 1;
-  transition-delay: 1.2s;
-}
-
-.wrapper.active .read-btn {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* CLOSE animation reset */
-.wrapper:not(.active) .letter {
-  opacity: 0;
-  transform: translateX(-50%) translateY(0px) scaleY(0.2);
-}
-
-.wrapper:not(.active) .poem {
-  opacity: 0;
-}
-
-.wrapper:not(.active) .flap {
-  transform: translateY(0);
-  opacity: 0.95;
-}
-
-.wrapper:not(.active) .read-btn {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-
-/* GRASS */
-.grass {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-
-  width: 100vw;
-  height: 200px;
-
-  background: linear-gradient(to top, #6fc96c, #bdf7a9);
-
-  border-top-left-radius: 90px;
-  border-top-right-radius: 90px;
-
-  z-index: 1;
-  overflow: hidden;
-}
-
-
-
-.grass::before {
-  content: "";
-  position: absolute;
-  top: -25px;
-  left: 0;
-
-  width: 100%;
-  height: 80px;
-
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.15) 0px,
-    rgba(255, 255, 255, 0.15) 10px,
-    transparent 10px,
-    transparent 22px
-  );
-
-  opacity: 0.35;
-}
-
-/* FLOWERS */
-.garden {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-
-  width: 100vw;
-  height: 170px;
-
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-end;
-
-  pointer-events: none;
-  z-index: 20;
-  padding: 0 10px;
-}
-
-
-.flower {
-  position: relative;
-  width: 4px;
-  background: linear-gradient(to top, #4caf50, #a8e6a3);
-  border-radius: 50px;
-  transform-origin: bottom center;
-  animation: sway 4s ease-in-out infinite alternate;
-}
-
-.flower:nth-child(odd) { animation-duration: 5s; }
-.flower:nth-child(even) { animation-duration: 3.8s; }
-
-.flower.tall { height: 110px; }
-.flower.medium { height: 90px; }
-.flower.short { height: 70px; }
-
-.leaf {
-  position: absolute;
-  width: 18px;
-  height: 10px;
-  background: #6fcf75;
-  border-radius: 50%;
-  opacity: 0.9;
-}
-
-.leaf.left {
-  left: -16px;
-  top: 40%;
-  transform: rotate(-25deg);
-}
-
-.leaf.right {
-  right: -16px;
-  top: 55%;
-  transform: rotate(25deg);
-}
-
-.flower .head {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 38px;
-  height: 38px;
-  animation: float 5s ease-in-out infinite;
-}
-
-.flower .head span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 14px;
-  height: 26px;
-  background: white;
-  border-radius: 50%;
-  transform-origin: center bottom;
-  transform: translate(-50%, -100%) rotate(var(--angle));
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-}
-
-.flower .head::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 14px;
-  height: 14px;
-  background: #fbc02d;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 0 3px #f9a825;
-}
-
-@keyframes sway {
-  0% { transform: rotate(-6deg); }
-  100% { transform: rotate(6deg); }
-}
-
-@keyframes float {
-  0% { transform: translateX(-50%) translateY(0px); }
-  50% { transform: translateX(-50%) translateY(-6px); }
-  100% { transform: translateX(-50%) translateY(0px); }
-}
-
-@media (max-width: 480px) {
-  .wrapper {
-    transform: scale(0.9);
-    margin-bottom: -55px;
-  }
-
-  .poem {
-    font-size: 0.74rem;
-  }
-
-  .read-btn {
-    top: -50px;
-    font-size: 0.75rem;
-    padding: 9px 16px;
-  }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Envelope Letter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- floating hearts -->
+  <div class="floating-hearts">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- sparkles -->
+  <div class="sparkles">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- sun -->
+  <div class="sun"></div>
+
+  <!-- clouds -->
+  <div class="clouds">
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+    <div class="cloud cloud4"></div>
+  </div>
+
+  <!-- wrapper envelope -->
+  <div class="wrapper" id="wrapper">
+
+    <button class="read-btn" id="readBtn">Click to read 💌</button>
+
+    <div class="letter">
+      <pre class="poem">
+if you look up at the sky,
+you shan't wonder why
+
+with you, i see a future
+bound as one, grow old and nurture
+
+i count the days
+when i get to gaze
+and be amazed
+
+after all, you are my muse
+t'is thee my heart'll always choose.
+
+love always,
+y
+      </pre>
+    </div>
+
+    <div class="flap"></div>
+
+    <div class="envelope">
+      <div class="label">for my dearest</div>
+    </div>
+  </div>
+
+  <!-- grass -->
+  <div class="grass"></div>
+
+  <!-- flowers -->
+  <div class="garden">
+    <div class="flower tall">
+      <div class="leaf left"></div>
+      <div class="leaf right"></div>
+      <div class="head">
+        <span style="--angle:0deg"></span>
+        <span style="--angle:60deg"></span>
+        <span style="--angle:120deg"></span>
+        <span style="--angle:180deg"></span>
+        <span style="--angle:240deg"></span>
+        <span style="--angle:300deg"></span>
+      </div>
+    </div>
+
+    <div class="flower medium">
+      <div class="leaf left"></div>
+      <div class="leaf right"></div>
+      <div class="head">
+        <span style="--angle:0deg"></span>
+        <span style="--angle:60deg"></span>
+        <span style="--angle:120deg"></span>
+        <span style="--angle:180deg"></span>
+        <span style="--angle:240deg"></span>
+        <span style="--angle:300deg"></span>
+      </div>
+    </div>
+
+    <div class="flower short">
+      <div class="leaf left"></div>
+      <div class="leaf right"></div>
+      <div class="head">
+        <span style="--angle:0deg"></span>
+        <span style="--angle:60deg"></span>
+        <span style="--angle:120deg"></span>
+        <span style="--angle:180deg"></span>
+        <span style="--angle:240deg"></span>
+        <span style="--angle:300deg"></span>
+      </div>
+    </div>
+
+    <div class="flower tall">
+      <div class="leaf left"></div>
+      <div class="leaf right"></div>
+      <div class="head">
+        <span style="--angle:0deg"></span>
+        <span style="--angle:60deg"></span>
+        <span style="--angle:120deg"></span>
+        <span style="--angle:180deg"></span>
+        <span style="--angle:240deg"></span>
+        <span style="--angle:300deg"></span>
+      </div>
+    </div>
+
+    <div class="flower medium">
+      <div class="leaf left"></div>
+      <div class="leaf right"></div>
+      <div class="head">
+        <span style="--angle:0deg"></span>
+        <span style="--angle:60deg"></span>
+        <span style="--angle:120deg"></span>
+        <span style="--angle:180deg"></span>
+        <span style="--angle:240deg"></span>
+        <span style="--angle:300deg"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
