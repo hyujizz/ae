@@ -615,8 +615,9 @@ body::after {
   }
 
   .read-btn {
-    top: -50px;
+    bottom: 230px; /* adjust this number */
     font-size: 0.75rem;
     padding: 9px 16px;
   }
 }
+
