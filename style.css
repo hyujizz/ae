@@ -5,19 +5,17 @@
   --text-color: #4a4458;
   --accent: #9575cd;
   --heart-color: #ff80ab;
-
   --env-height: 130px;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
 body {
   background: linear-gradient(to top, #dcedc8 0%, #f8f6f9 50%, #e1bee7 100%);
@@ -43,8 +41,7 @@ body::after {
   width: 100vw;
   height: 220px;
 
-  background: linear-gradient(
-    to top,
+  background: linear-gradient(to top,
     rgba(111, 201, 108, 0.0),
     rgba(111, 201, 108, 0.35)
   );
@@ -52,7 +49,6 @@ body::after {
   z-index: 0;
   pointer-events: none;
 }
-
 
 /* SUN */
 .sun {
@@ -127,7 +123,6 @@ body::after {
 .floating-hearts span:nth-child(3)  { left: 15%; animation-delay: 4s; }
 .floating-hearts span:nth-child(4)  { left: 22%; animation-delay: 6s; }
 .floating-hearts span:nth-child(5)  { left: 30%; animation-delay: 8s; }
-
 .floating-hearts span:nth-child(6)  { left: 70%; animation-delay: 1s; }
 .floating-hearts span:nth-child(7)  { left: 78%; animation-delay: 3s; }
 .floating-hearts span:nth-child(8)  { left: 85%; animation-delay: 5s; }
@@ -135,17 +130,11 @@ body::after {
 .floating-hearts span:nth-child(10) { left: 98%; animation-delay: 9s; }
 
 @keyframes floatSideHearts {
-  0% {
-    transform: translateY(0) translateX(0) rotate(45deg);
-    opacity: 0;
-  }
+  0% { transform: translateY(0) translateX(0) rotate(45deg); opacity: 0; }
   20% { opacity: 1; }
   50% { transform: translateY(-60vh) translateX(25px) rotate(45deg); }
   80% { transform: translateY(-90vh) translateX(-25px) rotate(45deg); }
-  100% {
-    transform: translateY(-130vh) translateX(30px) rotate(45deg);
-    opacity: 0;
-  }
+  100% { transform: translateY(-130vh) translateX(30px) rotate(45deg); opacity: 0; }
 }
 
 /* CLOUDS */
@@ -239,7 +228,6 @@ body::after {
 }
 
 /* LETTER */
-
 .letter {
   position: absolute;
   bottom: 10px;
@@ -248,7 +236,7 @@ body::after {
   transform-origin: bottom;
 
   width: 92%;
-  height: 320px; /* LONGER PAPER */
+  height: 340px;
   padding: 16px;
 
   background: var(--paper-color);
@@ -257,7 +245,7 @@ body::after {
   opacity: 0;
   z-index: 8;
 
-  transition: opacity 0.6s ease;
+  transition: transform 0.9s ease, opacity 0.6s ease;
   box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 
   background-image: linear-gradient(
@@ -267,22 +255,8 @@ body::after {
   );
   background-size: 100% 52px;
 
-  overflow: hidden; /* NO SCROLL */
+  overflow: hidden;
 }
-
-@keyframes pullOut {
-  0% {
-    transform: translateX(-50%) translateY(0px) scaleY(0.2);
-    opacity: 0;
-  }
-  30% { opacity: 1; }
-  100% {
-    transform: translateX(-50%) translateY(-160px) scaleY(1); /* LOWER */
-    opacity: 1;
-  }
-}
-
-
 
 .poem {
   font-family: "Courier New", Courier, monospace;
@@ -310,8 +284,6 @@ body::after {
 
   box-shadow: 0 12px 35px rgba(103, 58, 183, 0.18);
   z-index: 2;
-
-  overflow: visible;
 }
 
 .envelope::after {
@@ -364,25 +336,10 @@ body::after {
   opacity: 0.95;
 }
 
-/* LABEL */
-.label {
-  position: absolute;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.75rem;
-  font-weight: bold;
-
-  color: #ff4f8b;
-  z-index: 10;
-}
-
 /* BUTTON */
 .read-btn {
   position: absolute;
-  bottom: 200px;
+  bottom: 170px;
   left: 50%;
   transform: translateX(-50%);
 
@@ -404,7 +361,6 @@ body::after {
   transition: transform 0.2s ease, opacity 0.3s ease;
 }
 
-
 .read-btn:hover {
   transform: translateX(-50%) scale(1.05);
 }
@@ -413,7 +369,7 @@ body::after {
   transform: translateX(-50%) scale(0.95);
 }
 
-/* OPEN ANIMATION */
+/* OPEN */
 .wrapper.active .flap {
   transform: translateY(-70px);
   opacity: 0;
@@ -422,12 +378,10 @@ body::after {
   pointer-events: none;
 }
 
-/* letter waits until flap is mostly gone */
 .wrapper.active .letter {
   opacity: 1;
   transform: translateX(-50%) translateY(-220px) scaleY(1);
-  transition: transform 0.9s ease, opacity 0.6s ease;
-  transition-delay: 0.55s; /* <-- makes letter come out AFTER flap */
+  transition-delay: 0.55s;
 }
 
 .wrapper.active .poem {
@@ -440,33 +394,25 @@ body::after {
   pointer-events: none;
 }
 
-/* CLOSE animation (fold back in smoothly) */
-.wrapper .letter {
-  transition: transform 0.9s ease, opacity 0.6s ease;
-}
-
+/* CLOSE */
 .wrapper:not(.active) .letter {
   opacity: 0;
   transform: translateX(-50%) translateY(0px) scaleY(0.2);
-  transition-delay: 0s;
 }
 
 .wrapper:not(.active) .poem {
   opacity: 0;
-  transition: opacity 0.3s ease;
 }
 
 .wrapper:not(.active) .flap {
   transform: translateY(0);
   opacity: 0.95;
-  transition: transform 0.7s ease, opacity 0.4s ease;
-  transition-delay: 0.5s; /* flap comes back AFTER paper goes in */
+  transition-delay: 0.5s;
 }
 
 .wrapper:not(.active) .read-btn {
   opacity: 1;
   pointer-events: auto;
-  transition: opacity 0.5s ease;
   transition-delay: 0.8s;
 }
 
@@ -487,8 +433,6 @@ body::after {
   z-index: 1;
   overflow: hidden;
 }
-
-
 
 .grass::before {
   content: "";
@@ -513,7 +457,7 @@ body::after {
 /* FLOWERS */
 .garden {
   position: fixed;
-  bottom: 0;
+  bottom: -20px;
   left: 0;
 
   width: 100vw;
@@ -527,7 +471,6 @@ body::after {
   z-index: 20;
   padding: 0 10px;
 }
-
 
 .flower {
   position: relative;
@@ -624,7 +567,7 @@ body::after {
   }
 
   .read-btn {
-    top: -50px;
+    bottom: 200px;
     font-size: 0.75rem;
     padding: 9px 16px;
   }
