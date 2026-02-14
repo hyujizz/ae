@@ -234,7 +234,7 @@ body::after {
   height: 420px;
   cursor: pointer;
   z-index: 50;
-  margin-bottom: -40px;
+  margin-bottom: 20px;
   transform: scale(0.92);
 }
 
@@ -382,7 +382,7 @@ body::after {
 /* BUTTON */
 .read-btn {
   position: absolute;
-  top: 100px;
+  bottom: 155px;
   left: 50%;
   transform: translateX(-50%);
 
@@ -403,6 +403,7 @@ body::after {
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   transition: transform 0.2s ease, opacity 0.3s ease;
 }
+
 
 .read-btn:hover {
   transform: translateX(-50%) scale(1.05);
