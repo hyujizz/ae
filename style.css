@@ -53,7 +53,7 @@ body::after {
 /* SUN */
 .sun {
   position: absolute;
-  top: 90px;
+  top: 40px;
   right: 45px;
   width: 150px;
   height: 150px;
