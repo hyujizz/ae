@@ -344,6 +344,9 @@ body::after {
   transform: translateX(-50%);
 
   padding: 12px 22px;
+  min-width: 240px;
+  text-align: center;
+
   border: none;
   border-radius: 999px;
 
