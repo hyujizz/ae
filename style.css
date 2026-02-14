@@ -382,7 +382,7 @@ body::after {
 /* BUTTON */
 .read-btn {
   position: absolute;
-  bottom: 200px;
+  bottom: 140px;
   left: 50%;
   transform: translateX(-50%);
 
